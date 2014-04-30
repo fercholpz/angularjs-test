@@ -1,0 +1,9 @@
+<div class="col-md-6" >
+	<select style="width:200px" ui-select2 ng-model="select2" data-placeholder="Pick a house" >
+		<option ng-repeat="item in items" value="{{item.words}}">{{item.house}}</option>
+	</select>
+</div>
+<div class="col-md-6">
+	<label class="left">Words: </label>
+	<span class="left" >{{select2}}</span>
+</div>
