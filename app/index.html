@@ -57,8 +57,13 @@
             <div class="row" >
 
                 <h1 >Pagination</h1>
-                <listitems></listitems>
-                <pagination pages="arraytotal"></pagination>
+                <!--<listitems></listitems>-->
+                <div class="row" ng-controller="listitems">
+                    <ul class="list-items" >
+                        <li ng-repeat="item in items">{{item.value}}</li>
+                    </ul>
+                    <pagination pages="arraytotal"></pagination>
+                </div>
             </div>
 
             

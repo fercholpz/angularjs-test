@@ -61,9 +61,26 @@ myThroneModule.directive('checkbox',
 			}
 		}
 	});
+myThroneModule.controller('listitems',
+	['$scope',function($scope){
+		$scope.items = [
+			{value: "one"},
+			{value: "two"},
+			{value: "three"},
+			{value: "four"},
+			{value: "five"},
+			{value: "six"},
+			{value: "seven"},
+			{value: "eight"}
+		];
+		$scope.gotopageClick = function(page_pos) {
+			$scope.page_pos = page_pos;
 
-
-myThroneModule.directive('listitems', function(){
+          	$scope.gotopage = true;
+      	}
+		
+	}]);
+/*myThroneModule.directive('listitems', function(){
 	return{
 		restrict: 'E',
 		templateUrl: 'templates/directives/listitems.html',
@@ -77,10 +94,9 @@ myThroneModule.directive('listitems', function(){
 				{value: "five"},
 				{value: "six"}
 			]; 
-			
 		}
 	}
-});
+});*/
 
 myThroneModule.directive('pagination', function(){
 	return{
@@ -90,18 +106,22 @@ myThroneModule.directive('pagination', function(){
 		controller: function($scope){
 			$scope.totalItems = $scope.items.length;
 			$scope.limit = 3;
-			$scope.pages = $scope.totalItems / $scope.limit;
+			$scope.pages = Math.ceil($scope.totalItems / $scope.limit);
 			$scope.arraytotal = [];
 			for(var i = 1; i <= $scope.pages; i++){
 				$scope.arraytotal[i-1] = i;
 			};
-			$scope.gotopage = function(page_pos){  
+			
+			$scope.$watch('gotopage', function(){
+
+				if(!$scope.page_pos){
+					$scope.page_pos = 1;
+				}  
 			    var show_per_page = $scope.limit;  
-			    start_from = (page_pos -1) * show_per_page;  
+			    start_from = ($scope.page_pos -1) * show_per_page;  
 			    end_on = start_from + show_per_page; 
 			    $('.list-items').children().css('display', 'none').slice(start_from, end_on).css('display', 'block');  
-				
-			} 
+			});
 
 		}
 	}
