@@ -113,7 +113,7 @@ myThroneModule.directive('pagination', function(){
 			};
 			
 			$scope.$watch('gotopage', function(){
-
+				$scope.gotopage = false;
 				if(!$scope.page_pos){
 					$scope.page_pos = 1;
 				}  
